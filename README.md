@@ -1,3 +1,6 @@
+# Screenshot
+![screenshot](https://github.com/Luciano275/Archlinux/blob/main/Imagenes/screenshot.png)
+
 # Configuración de Arch Linux
 
 ### Agregar un usuario sudo
