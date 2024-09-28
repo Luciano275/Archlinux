@@ -68,10 +68,15 @@ def config_keys(mod, terminal, lazy):
 
       # Screenshot
       Key([mod, "mod1"], "h", lazy.spawn("flameshot gui"), desc="Take a Screenshot"),
+      Key([mod, "mod1"], "g", lazy.spawn("flameshot screen"), desc="Take a Screenshot of the entire screen"),
       
       # Monitores
       Key([mod, "mod1"], "p", lazy.spawn("arandr"), desc="Interfaz grafica de salidas de video."),
 
       # Salida de audio
       Key([mod, "mod1"], "o", lazy.spawn("pavucontrol"), desc="Interfaz grafica de salida de audio."),
+
+      # Brillo
+      Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +10%")),
+      Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-"))
   ]

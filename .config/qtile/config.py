@@ -7,7 +7,7 @@ from settings.keys import config_keys
 import os
 
 mod = "mod4"
-terminal = "alacritty"
+terminal = "warp-terminal"
 
 #Keys
 keys = config_keys(mod, terminal, lazy)
@@ -76,31 +76,31 @@ for i, group in enumerate(groups):
 default_config_layout={
     'border_width': 1,
     'border_focus': '#09f',
-    'margin': 20
+    'margin': 10
 }
 
 layouts = [
     layout.MonadTall(
         border_width=1,
         border_focus="#09f",
-        margin = 20,
+        margin = 10,
         border_normal = "#222222",
         single_border_width = 0
     ),
     layout.Max(
-        margin = 20,
+        margin = 10,
     ),
     #layout.RatioTile(**default_config_layout),
-    layout.Matrix(
-        columns=2,
-        **default_config_layout
-    ),
+    # layout.Matrix(
+    #     columns=2,
+    #     **default_config_layout
+    # ),
     #layout.Bsp(**default_config_layout),
     #layout.Floating(margin=10, zindex=1),
     #layout.Columns(border_focus="#d75f5f", border_width=1, single_border_width = 0, margin = 10),
     # Try more layouts by unleashing below layouts.
     #layout.Stack(num_stacks=2),
-    # layout.MonadWide(),
+    layout.MonadWide(**default_config_layout),
     # layout.Tile(),
     # layout.TreeTab(),
     # layout.VerticalTile(),
@@ -150,10 +150,10 @@ def screen1_widgets():
                        rounded = False,
                        highlight_color = "#000",
                        highlight_method = "line",
-                       this_current_screen_border = ["#9b0d2a", "#9b0d2a"],
-                       this_screen_border = ["#9b0d2a", "#9b0d2a"],
-                       other_current_screen_border = ["#8d5253", "#8d5253"],
-                       other_screen_border = ["#8d5253", "#8d5253"],
+                       other_current_screen_border = ["#9b0d2a", "#9b0d2a"],
+                       other_screen_border = ["#9b0d2a", "#9b0d2a"],
+                       this_current_screen_border = ["#00ff22", "#00ff22"],
+                       this_screen_border = ["#00ff22", "#00ff22"],
                        background = colors[0],
                        padding_x=10,
                        margin_x=0,
@@ -226,25 +226,25 @@ def screen1_widgets():
 
             separador(),
 
-            rounded_left(4, None, paleta_generada, colors),
-            widget.Volume(
-                       font = "FontAwesome",
-                       foreground = colors[2],
-                       background = paleta_generada[4],
-                       emoji=True,
-                       emoji_list=['', '', '', ''],
-                       fontsize=20,
-                       padding=10,
-                       device="default"
-                       ),
-            widget.Volume(
-                foreground=colors[2],
-                background=paleta_generada[4],
-                fmt='{}',
-            ),
+            #rounded_left(0, None),
+            # widget.Volume(
+            #            font = "FontAwesome",
+            #            foreground = colors[2],
+            #            background = paleta_generada[4],
+            #            emoji=True,
+            #            emoji_list=['', '', '', ''],
+            #            fontsize=20,
+            #            padding=10,
+            #            device="default"
+            #            ),
+            # widget.Volume(
+            #     foreground=colors[2],
+            #     background=paleta_generada[4],
+            #     fmt='{}',
+            # ),
 
             widget.Systray(
-                       background = paleta_generada[4],
+                       background = ["#00000000"],
                        foreground = paleta_generada[4],
                        font_size=12,
                        padding=10
@@ -252,11 +252,10 @@ def screen1_widgets():
 
             widget.QuickExit(
                 font = "FontAwesome",
-                background = paleta_generada[4],
+                background = ["#00000000"],
                 default_text = "",
                 padding=5,
             ),
-            rounded_right(4, None, paleta_generada, colors),
 
             ]
 
@@ -274,12 +273,14 @@ def screen2_widgets():
                        highlight_method = "line",
                        this_current_screen_border = ["#9b0d2a", "#9b0d2a"],
                        this_screen_border = ["#9b0d2a", "#9b0d2a"],
-                       other_current_screen_border = ["#8d5253", "#8d5253"],
-                       other_screen_border = ["#8d5253", "#8d5253"],
+                       other_current_screen_border = ["#00ff22", "#00ff22"],
+                       other_screen_border = ["#00ff22", "#00ff22"],
                        background = colors[0],
                        padding_x=10,
                        margin_x=0,
-                       spacing=2
+                       spacing=2,
+                       fmt="",
+                       disable_drag=True,
                        ),
             rounded_right(0, None, colors, colors),
                     
@@ -334,45 +335,44 @@ def screen2_widgets():
 
             separador(),
 
-            rounded_left(4, None, paleta_generada, colors),
-            widget.Volume(
-                       font = "FontAwesome",
-                       foreground = colors[2],
-                       background = paleta_generada[4],
-                       emoji=True,
-                       emoji_list=['', '', '', ''],
-                       fontsize=20,
-                       padding=10,
-                       device="default"
-                       ),
-            widget.Volume(
-                foreground=colors[2],
-                background=paleta_generada[4],
-                fmt='{}',
-            ),
+            # rounded_left(4, None, paleta_generada, colors),
+            # widget.Volume(
+            #            font = "FontAwesome",
+            #            foreground = colors[2],
+            #            background = paleta_generada[4],
+            #            emoji=True,
+            #            emoji_list=['', '', '', ''],
+            #            fontsize=20,
+            #            padding=10,
+            #            device="default"
+            #            ),
+            # widget.Volume(
+            #     foreground=colors[2],
+            #     background=paleta_generada[4],
+            #     fmt='{}',
+            # ),
 
-            widget.Systray(
-                       background = paleta_generada[4],
-                       foreground = paleta_generada[4],
-                       font_size=12,
-                       padding=10
-                       ),
+            # widget.Systray(
+            #            background = ["#00000000"],
+            #            foreground = paleta_generada[4],
+            #            font_size=12,
+            #            padding=10
+            #            ),
 
             widget.QuickExit(
                 font = "FontAwesome",
-                background = paleta_generada[4],
+                background = ["#00000000"],
                 default_text = "",
                 padding=5,
-            ),
-            rounded_right(4, None, paleta_generada, colors),
+            )
 
             ]
 
 def init_screens():
     return [
-        Screen(top=bar.Bar(widgets=screen1_widgets(), background='#00000000', opacity=0.9, size=30, margin=[20, 20, 0, 20])),
-        Screen(top=bar.Bar(widgets=screen2_widgets(), background='#00000000', opacity=0.9, size=30, margin=[20, 20, 0, 20])),
-        Screen(top=bar.Bar(widgets=screen2_widgets(), background='#00000000', opacity=0.9, size=30, margin=[20, 20, 0, 20]))
+        Screen(top=bar.Bar(widgets=screen1_widgets(), background='#00000000', opacity=0.9, size=30, margin=[10, 10, 0, 10])),
+        Screen(top=bar.Bar(widgets=screen2_widgets(), background='#00000000', opacity=0.9, size=30, margin=[10, 10, 0, 10])),
+        Screen(top=bar.Bar(widgets=screen2_widgets(), background='#00000000', opacity=0.9, size=30, margin=[10, 10, 0, 10]))
     ]
 
 if __name__ in ["config", "__main__"]:
@@ -411,9 +411,7 @@ wmname = "LG3D"
 
 #Autostart QTile
 cmd = [
-    "feh --bg-fill ~/Imagenes/wp2.jpg",
-    "nm-applet &",
-    "picom &",
+    "feh --bg-fill ~/Imagenes/wp.jpg"
 ]
 
 for x in cmd:
