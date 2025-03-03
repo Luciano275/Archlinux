@@ -7,7 +7,7 @@ from settings.keys import config_keys
 import os
 
 mod = "mod4"
-terminal = "warp-terminal"
+terminal = "alacritty"
 
 #Keys
 keys = config_keys(mod, terminal, lazy)
@@ -76,19 +76,19 @@ for i, group in enumerate(groups):
 default_config_layout={
     'border_width': 1,
     'border_focus': '#09f',
-    'margin': 10
+    'margin': 0
 }
 
 layouts = [
     layout.MonadTall(
         border_width=1,
         border_focus="#09f",
-        margin = 10,
+        margin = 0,
         border_normal = "#222222",
         single_border_width = 0
     ),
     layout.Max(
-        margin = 10,
+        margin = 0,
     ),
     #layout.RatioTile(**default_config_layout),
     # layout.Matrix(
@@ -99,8 +99,8 @@ layouts = [
     #layout.Floating(margin=10, zindex=1),
     #layout.Columns(border_focus="#d75f5f", border_width=1, single_border_width = 0, margin = 10),
     # Try more layouts by unleashing below layouts.
-    #layout.Stack(num_stacks=2),
-    layout.MonadWide(**default_config_layout),
+    layout.Stack(num_stacks=2, **default_config_layout),
+    #layout.MonadWide(**default_config_layout),
     # layout.Tile(),
     # layout.TreeTab(),
     # layout.VerticalTile(),
@@ -135,15 +135,25 @@ def rounded_left(fg=0, bg=None, foregroundColors=colors, backgroundColors=colors
         padding=-2
     )
 
+def powerline(fg=0, bg=None, foregroundColors=colors, backgroundColors=colors):
+    return widget.TextBox(
+        font="UbuntuMono Nerd Font Bold",
+        foreground=foregroundColors[fg],
+        background=None if bg == None else backgroundColors[bg],
+        text="◢",
+        fontsize=65,
+        padding=-1
+    )
+
 def separador():
     return widget.Sep(padding=20, linewidth=0)
     
 def screen1_widgets():
     return [
-            rounded_left(0, None, colors, colors),
+            # rounded_left(0, None, colors, colors),
             widget.GroupBox(
                        font = "UbuntuMono Nerd Font Bold",#"Ubuntu Bold",
-                       fontsize = 20,
+                       fontsize = 15,
                        borderwidth = 2,
                        active = ["#ff244e", "#d22542", "#8c0023", "#590314", "#3f000a"],
                        inactive = "#444",
@@ -152,8 +162,8 @@ def screen1_widgets():
                        highlight_method = "line",
                        other_current_screen_border = ["#9b0d2a", "#9b0d2a"],
                        other_screen_border = ["#9b0d2a", "#9b0d2a"],
-                       this_current_screen_border = ["#00ff22", "#00ff22"],
-                       this_screen_border = ["#00ff22", "#00ff22"],
+                       this_current_screen_border = ["#00f", "#05f", "#0af", "#01f"],
+                       this_screen_border = ["#00f", "#05f", "#0af", "#01f"],
                        background = colors[0],
                        padding_x=10,
                        margin_x=0,
@@ -161,10 +171,10 @@ def screen1_widgets():
                        fmt="",
                        disable_drag=True,
                        ),
-            rounded_right(0, None, colors, colors),
+            # rounded_right(0, None, colors, colors),
                     
             widget.WindowName(
-                       foreground = ["#0f0", "#0f2", "#3f5", "#fff"],
+                       foreground = ["#00f", "#05f", "#0af", "#01f"],
                        background = None,
                        padding = 10,
                        max_chars=30
@@ -177,7 +187,10 @@ def screen1_widgets():
                        background = None
                        ),
 
-            rounded_left(0, None, widget_colors, colors),
+            # rounded_left(0, None, widget_colors, colors),
+
+            powerline(0, None, widget_colors, colors),
+
             widget.Memory(
                        foreground = widget_colors[2],
                        background = widget_colors[0],#paleta_generada[1],
@@ -194,22 +207,23 @@ def screen1_widgets():
                 update_interval = 1,
                 padding=10
             ),
-            rounded_right(0, None, widget_colors, colors),
+            # rounded_right(0, None, widget_colors, colors),
 
-            separador(),
+            powerline(1, 0, widget_colors, widget_colors),
 
-            rounded_left(1, None, widget_colors, colors),
+            # rounded_left(1, None, widget_colors, colors),
             widget.Clock(
                        foreground = colors[0],
                        background = widget_colors[1],
                        format = "%d/%m/%y - %H:%M",
                        padding=10
                        ),
-            rounded_right(1, None, widget_colors, colors),
+            # rounded_right(1, None, widget_colors, colors),
 
-            separador(),
+            # rounded_left(3, None, paleta_generada, colors),
 
-            rounded_left(3, None, paleta_generada, colors),
+            powerline(3, 1, paleta_generada, widget_colors),
+
             widget.CurrentLayoutIcon(
                        custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
                        foreground = widget_colors[2],
@@ -222,9 +236,9 @@ def screen1_widgets():
                        background = paleta_generada[3],
                        padding = 5
                        ),
-            rounded_right(3, None, paleta_generada, colors),
 
-            separador(),
+            powerline(0, 3, colors, paleta_generada),
+            # rounded_right(3, None, paleta_generada, colors),
 
             #rounded_left(0, None),
             # widget.Volume(
@@ -246,7 +260,7 @@ def screen1_widgets():
             widget.Systray(
                        background = ["#00000000"],
                        foreground = paleta_generada[4],
-                       font_size=12,
+                       font_size=20,
                        padding=10
                        ),
 
@@ -261,20 +275,20 @@ def screen1_widgets():
 
 def screen2_widgets():
     return [
-            rounded_left(0, None, colors, colors),
+            # rounded_left(0, None, colors, colors),
             widget.GroupBox(
                        font = "UbuntuMono Nerd Font Bold",#"Ubuntu Bold",
-                       fontsize = 20,
+                       fontsize = 15,
                        borderwidth = 2,
                        active = ["#ff244e", "#d22542", "#8c0023", "#590314", "#3f000a"],
                        inactive = "#444",
                        rounded = False,
                        highlight_color = "#000",
                        highlight_method = "line",
-                       this_current_screen_border = ["#9b0d2a", "#9b0d2a"],
-                       this_screen_border = ["#9b0d2a", "#9b0d2a"],
-                       other_current_screen_border = ["#00ff22", "#00ff22"],
-                       other_screen_border = ["#00ff22", "#00ff22"],
+                       other_current_screen_border = ["#9b0d2a", "#9b0d2a"],
+                       other_screen_border = ["#9b0d2a", "#9b0d2a"],
+                       this_current_screen_border = ["#00f", "#05f", "#0af", "#01f"],
+                       this_screen_border = ["#00f", "#05f", "#0af", "#01f"],
                        background = colors[0],
                        padding_x=10,
                        margin_x=0,
@@ -282,10 +296,10 @@ def screen2_widgets():
                        fmt="",
                        disable_drag=True,
                        ),
-            rounded_right(0, None, colors, colors),
+            # rounded_right(0, None, colors, colors),
                     
             widget.WindowName(
-                       foreground = ["#f00", "#f20", "#f35", "#fff"],
+                       foreground = ["#00f", "#05f", "#0af", "#01f"],
                        background = None,
                        padding = 10,
                        max_chars=30
@@ -294,10 +308,14 @@ def screen2_widgets():
             widget.Sep(
                        linewidth = 0,
                        padding = 5,
+                       foreground = colors[2],
                        background = None
                        ),
 
-            rounded_left(0, None, widget_colors, colors),
+            # rounded_left(0, None, widget_colors, colors),
+
+            powerline(0, None, widget_colors, colors),
+
             widget.Memory(
                        foreground = widget_colors[2],
                        background = widget_colors[0],#paleta_generada[1],
@@ -314,26 +332,25 @@ def screen2_widgets():
                 update_interval = 1,
                 padding=10
             ),
-            rounded_right(0, None, widget_colors, colors),
+            # rounded_right(0, None, widget_colors, colors),
 
-            separador(),
+            powerline(2, 0, paleta_generada, widget_colors),
 
-            rounded_left(3, None, paleta_generada, colors),
             widget.CurrentLayoutIcon(
                        custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
                        foreground = widget_colors[2],
-                       background = paleta_generada[3],
+                       background = paleta_generada[2],
                        padding = 5,
                        scale = 0.7
                        ),
             widget.CurrentLayout(
                        foreground = widget_colors[2],
-                       background = paleta_generada[3],
+                       background = paleta_generada[2],
                        padding = 5
                        ),
-            rounded_right(3, None, paleta_generada, colors),
 
-            separador(),
+            powerline(0, 2, colors, paleta_generada),
+            # rounded_right(3, None, paleta_generada, colors),
 
             # rounded_left(4, None, paleta_generada, colors),
             # widget.Volume(
@@ -370,9 +387,9 @@ def screen2_widgets():
 
 def init_screens():
     return [
-        Screen(top=bar.Bar(widgets=screen1_widgets(), background='#00000000', opacity=0.9, size=30, margin=[10, 10, 0, 10])),
-        Screen(top=bar.Bar(widgets=screen2_widgets(), background='#00000000', opacity=0.9, size=30, margin=[10, 10, 0, 10])),
-        Screen(top=bar.Bar(widgets=screen2_widgets(), background='#00000000', opacity=0.9, size=30, margin=[10, 10, 0, 10]))
+        Screen(top=bar.Bar(widgets=screen1_widgets(), background='#00000000', opacity=0.9, size=30)),
+        Screen(top=bar.Bar(widgets=screen2_widgets(), background='#00000000', opacity=0.9, size=30)),
+        Screen(top=bar.Bar(widgets=screen2_widgets(), background='#00000000', opacity=0.9, size=30))
     ]
 
 if __name__ in ["config", "__main__"]:
